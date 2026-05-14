@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Will You Be Mine Again ❤️</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    font-family:sans-serif;
+}
+
+/* START SCREEN (required for music unlock) */
+#start{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:black;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:20;
+    cursor:pointer;
+}
+
+#start h1{
+    color:red;
+    font-size:24px;
+}
+
+/* floating hearts */
+.bg{
+    position:absolute;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+.bg span{
+    position:absolute;
+    bottom:-50px;
+    color:red;
+    animation:float 6s linear infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(0); opacity:1;}
+    100%{transform:translateY(-120vh); opacity:0;}
+}
+
+/* IMAGE HEART (your image becomes the heart) */
+.heart{
+    width:340px;
+    height:340px;
+    animation:beat 1.2s infinite;
+    filter:drop-shadow(0 0 30px red);
+}
+
+.heart img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    clip-path: path("M170 300 C 40 220, 0 160, 0 100 C 0 40, 60 0, 120 40 C 150 60, 170 90, 170 90 C 170 90, 190 60, 220 40 C 280 0, 340 40, 340 100 C 340 160, 300 220, 170 300 Z");
+}
+
+/* heartbeat */
+@keyframes beat{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.08);}
+    100%{transform:scale(1);}
+}
+
+/* text overlay */
+.text{
+    position:absolute;
+    color:white;
+    font-size:22px;
+    text-align:center;
+    text-shadow:0 0 10px red;
+    top:65%;
+}
+
+/* NO BUTTON REMOVED (not included at all) */
+</style>
+</head>
+
+<body>
+
+<!-- START SCREEN -->
+<div id="start">
+    <h1>❤️ Tap Anywhere to Open Your Message</h1>
+    <p>Music will start automatically</p>
+</div>
+
+<!-- MUSIC -->
+<audio id="music">
+    <source src="music.mp3" type="audio/mp3">
+</audio>
+
+<!-- FLOATING HEARTS -->
+<div class="bg" id="bg"></div>
+
+<!-- HEART IMAGE -->
+<div class="heart">
+    <img src="your-image.jpg">
+</div>
+
+<!-- TEXT -->
+<div class="text">
+    Will You Be Mine Again?
+</div>
+
+<script>
+
+/* floating hearts */
+const bg = document.getElementById("bg");
+
+for(let i=0;i<30;i++){
+    let s=document.createElement("span");
+    s.innerHTML="❤";
+    s.style.left=Math.random()*100+"vw";
+    s.style.animationDuration=(3+Math.random()*5)+"s";
+    s.style.fontSize=(10+Math.random()*30)+"px";
+    bg.appendChild(s);
+}
+
+/* MUSIC START (required user interaction) */
+document.getElementById("start").addEventListener("click", function(){
+    this.style.display="none";
+    const music = document.getElementById("music");
+    music.play();
+    music.loop = false; // plays until file ends (your requirement)
+});
+
+</script>
+
+</body>
+</html>
